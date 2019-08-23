@@ -661,14 +661,12 @@ public class BluetoothPrinter extends CordovaPlugin {
         // example
         String name = "SICU-151";
         String address = "74:F0:7D:E6:29:F6";
-    
+        context = this.cordova.getActivity().getApplicationContext();
         bxlConfigLoader = new BXLConfigLoader(context);
         try {
           bxlConfigLoader.openFile();
-          callbackContext.success("Data start");
 
         } catch (Exception e) {
-          callbackContext.error("Data Sent start error" + e.getMessage());
           e.printStackTrace();
           bxlConfigLoader.newFile();
         }
