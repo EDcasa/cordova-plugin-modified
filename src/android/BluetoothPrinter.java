@@ -158,7 +158,23 @@ public class BluetoothPrinter extends CordovaPlugin {
 
     //This will return the array list of paired bluetooth printers
     void listBT(CallbackContext callbackContext,String name) {
-        final Context context;
+
+        try {
+            posPrinter.open(logicalName);
+            posPrinter.claim(0);
+            posPrinter.setDeviceEnabled(true);
+            callbackContext.success("device connect");
+          } catch (JposException e) {
+            callbackContext.error(e);
+            e.printStackTrace();
+            try {
+                callbackContext.success("close");
+              posPrinter.close();
+            } catch (JposException e1) {
+                callbackContext.error(e1);
+              e1.printStackTrace();
+            }
+          }/*
         String errMsg = null;
         this.context = context;
         try {
@@ -173,7 +189,7 @@ public class BluetoothPrinter extends CordovaPlugin {
             Log.e(LOG_TAG, errMsg);
             e.printStackTrace();
             callbackContext.error(errMsg);
-        }
+        }*/
     }
 
     // This will find a bluetooth printer device
