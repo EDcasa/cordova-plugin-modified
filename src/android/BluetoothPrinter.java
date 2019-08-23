@@ -158,7 +158,7 @@ public class BluetoothPrinter extends CordovaPlugin {
 
     //This will return the array list of paired bluetooth printers
     void listBT(CallbackContext callbackContext,String name) {
-        Context context = this.cordova.getActivity().getApplicationContext();
+        jdk.nashorn.internal.runtime.Context context = this.cordova.getActivity().getApplicationContext();
         if (start(context)) {
           try {
             posPrinter.open(logicalName);
@@ -172,7 +172,7 @@ public class BluetoothPrinter extends CordovaPlugin {
             posPrinter.printNormal(POSPrinterConst.PTR_S_RECEIPT, "holamundo" + "\n");
             callbackContext.success("Data Sent");
           } catch (JposException e) {
-            callbackContext.error("Data Not send" + e.getMessage());
+            callbackContext.error("Data Not send" + context.toString());
             e.printStackTrace();
           } finally {
             try {
