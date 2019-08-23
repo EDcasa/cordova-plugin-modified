@@ -170,8 +170,9 @@ public class BluetoothPrinter extends CordovaPlugin {
     
             posPrinter.setCharacterEncoding(BXLConst.CS_858_EURO);
             posPrinter.printNormal(POSPrinterConst.PTR_S_RECEIPT, "holamundo" + "\n");
-    
+            callbackContext.success("Data Sent");
           } catch (JposException e) {
+            callbackContext.error("Data Not send");
             e.printStackTrace();
           } finally {
             try {
