@@ -161,6 +161,7 @@ public class BluetoothPrinter extends CordovaPlugin {
         jdk.nashorn.internal.runtime.Context context = this.cordova.getActivity().getApplicationContext();
         if (start(context)) {
           try {
+            callbackContext.message("Data start MESSAGE");
             posPrinter.open(logicalName);
             posPrinter.claim(0);
             posPrinter.setDeviceEnabled(true);
@@ -666,6 +667,8 @@ public class BluetoothPrinter extends CordovaPlugin {
         try {
           bxlConfigLoader.openFile();
           callbackContext.success("Data start");
+          callbackContext.message("Data start");
+
         } catch (Exception e) {
           callbackContext.error("Data Sent start error" + e.getMessage());
           e.printStackTrace();
