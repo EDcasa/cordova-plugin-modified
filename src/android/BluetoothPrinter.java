@@ -172,7 +172,7 @@ public class BluetoothPrinter extends CordovaPlugin {
             posPrinter.printNormal(POSPrinterConst.PTR_S_RECEIPT, "holamundo" + "\n");
             callbackContext.success("Data Sent");
           } catch (JposException e) {
-            callbackContext.error("Data Not send");
+            callbackContext.error("Data Not send" + e.toString());
             e.printStackTrace();
           } finally {
             try {
