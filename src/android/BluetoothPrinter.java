@@ -1,6 +1,5 @@
 package com.ru.cordova.printer.bluetooth;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -34,6 +33,35 @@ import android.util.Base64;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CallbackContext;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.content.Context;
+import android.widget.Toast;
+import android.util.Log;
+import com.bxl.BXLConst;
+import com.bxl.config.editor.BXLConfigLoader;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import jpos.JposConst;
+import jpos.JposException;
+import jpos.POSPrinter;
+import jpos.POSPrinterConst;
+import jpos.config.JposEntry;
+import jpos.events.ErrorEvent;
+import jpos.events.ErrorListener;
+import jpos.events.OutputCompleteEvent;
+import jpos.events.OutputCompleteListener;
+import jpos.events.StatusUpdateEvent;
+import jpos.events.StatusUpdateListener;
+
+
 public class BluetoothPrinter extends CordovaPlugin {
 
     private static final String LOG_TAG = "BluetoothPrinter";
@@ -48,6 +76,15 @@ public class BluetoothPrinter extends CordovaPlugin {
     int counter;
     volatile boolean stopWorker;
     Bitmap bitmap;
+
+    private BXLConfigLoader bxlConfigLoader;
+    private POSPrinter posPrinter;
+    private String logicalName;
+    Context context;
+
+    private int brightness = 50;
+    private int compress = 1;
+    
 
     public BluetoothPrinter() {
     }
@@ -120,8 +157,9 @@ public class BluetoothPrinter extends CordovaPlugin {
     }
 
     //This will return the array list of paired bluetooth printers
-    void listBT(CallbackContext callbackContext, String name) {
+    void listBT(CallbackContext callbackContext, final Context context,String name) {
         String errMsg = null;
+        this.context = context;
         try {
             if (name == "TEST") {
                 callbackContext.success(name);
