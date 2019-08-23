@@ -161,7 +161,6 @@ public class BluetoothPrinter extends CordovaPlugin {
         jdk.nashorn.internal.runtime.Context context = this.cordova.getActivity().getApplicationContext();
         if (start(context)) {
           try {
-            callbackContext.message("Data start MESSAGE");
             posPrinter.open(logicalName);
             posPrinter.claim(0);
             posPrinter.setDeviceEnabled(true);
