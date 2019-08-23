@@ -158,38 +158,29 @@ public class BluetoothPrinter extends CordovaPlugin {
 
     //This will return the array list of paired bluetooth printers
     void listBT(CallbackContext callbackContext,String name) {
-
-        try {
+        Context context = this.cordova.getActivity().getApplicationContext();
+        if (start(context)) {
+          try {
             posPrinter.open(logicalName);
             posPrinter.claim(0);
             posPrinter.setDeviceEnabled(true);
-            callbackContext.success("device connect");
+    
+            String ESC = new String(new byte[] { 0x1b, 0x7c });
+            String LF = "\n";
+    
+            posPrinter.setCharacterEncoding(BXLConst.CS_858_EURO);
+            posPrinter.printNormal(POSPrinterConst.PTR_S_RECEIPT, "holamundo" + "\n");
+    
           } catch (JposException e) {
-            callbackContext.error("Error");
             e.printStackTrace();
+          } finally {
             try {
-                callbackContext.success("close");
               posPrinter.close();
-            } catch (JposException e1) {
-                callbackContext.error("Error");
-              e1.printStackTrace();
+            } catch (JposException e) {
+              e.printStackTrace();
             }
-          }/*
-        String errMsg = null;
-        this.context = context;
-        try {
-            if (name == "TEST") {
-                callbackContext.success(name);
-            } else {
-                callbackContext.error("No Bluetooth Device Found");
-            }
-            //Log.d(LOG_TAG, "Bluetooth Device Found: " + mmDevice.getName());
-        } catch (Exception e) {
-            errMsg = e.getMessage();
-            Log.e(LOG_TAG, errMsg);
-            e.printStackTrace();
-            callbackContext.error(errMsg);
-        }*/
+          }
+        }
     }
 
     // This will find a bluetooth printer device
