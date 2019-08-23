@@ -159,29 +159,7 @@ public class BluetoothPrinter extends CordovaPlugin {
     //This will return the array list of paired bluetooth printers
     void listBT(CallbackContext callbackContext,String name) {
         Context context = this.cordova.getActivity().getApplicationContext();
-        if (start(context, callbackContext)) {
-          try {
-            posPrinter.open(logicalName);
-            posPrinter.claim(0);
-            posPrinter.setDeviceEnabled(true);
-    
-            String ESC = new String(new byte[] { 0x1b, 0x7c });
-            String LF = "\n";
-    
-            posPrinter.setCharacterEncoding(BXLConst.CS_858_EURO);
-            posPrinter.printNormal(POSPrinterConst.PTR_S_RECEIPT, "holamundo" + "\n");
-            callbackContext.success("Data Sent");
-          } catch (JposException e) {
-            callbackContext.error("Data Not send" + context.toString());
-            e.printStackTrace();
-          } finally {
-            try {
-              posPrinter.close();
-            } catch (JposException e) {
-              e.printStackTrace();
-            }
-          }
-        }
+        start(context);
     }
 
     // This will find a bluetooth printer device
@@ -657,7 +635,7 @@ public class BluetoothPrinter extends CordovaPlugin {
      * Functions of bixolon
      */
 
-    private boolean start(final Context context, CallbackContext callbackContext) {
+    public boolean start(final Context context, CallbackContext callbackContext) {
         // example
         String name = "SICU-151";
         String address = "74:F0:7D:E6:29:F6";
@@ -759,6 +737,16 @@ public class BluetoothPrinter extends CordovaPlugin {
               BXLConfigLoader.DEVICE_BUS_BLUETOOTH, address);
     
           bxlConfigLoader.saveFile();
+
+          posPrinter.open(logicalName);
+          posPrinter.claim(0);
+          posPrinter.setDeviceEnabled(true);
+
+          String ESC = new String(new byte[]{0x1b, 0x7c});
+          String LF = "\n";
+
+          posPrinter.setCharacterEncoding(BXLConst.CS_858_EURO);
+          posPrinter.printNormal(POSPrinterConst.PTR_S_RECEIPT, "holaaaaaaa" + "\n");
         } catch (Exception e) {
           e.printStackTrace();
           return false;
