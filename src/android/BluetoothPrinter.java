@@ -755,8 +755,8 @@ public class BluetoothPrinter extends CordovaPlugin {
         return true;
       }
 
-      public void printPair(final Context context, String label, String value) {
-        if (start(context)) {
+      public void printPair(final Context context, String label, String value, CallbackContext callbackContext) {
+        if (start(context, callbackContext)) {
     
           try {
             posPrinter.open(logicalName);
@@ -783,9 +783,9 @@ public class BluetoothPrinter extends CordovaPlugin {
         }
       }
     
-      public void printImage(final Context context, String path) {
+      public void printImage(final Context context, String path, CallbackContext callbackContext) {
         Log.v("RSULT:", path);
-        if (start(context)) {
+        if (start(context, callbackContext)) {
           if (openPrinter()) {
             InputStream is = null;
             try {
