@@ -158,7 +158,7 @@ public class BluetoothPrinter extends CordovaPlugin {
 
     //This will return the array list of paired bluetooth printers
     void listBT(CallbackContext callbackContext,String name) {
-        jdk.nashorn.internal.runtime.Context context = this.cordova.getActivity().getApplicationContext();
+        Context context = this.cordova.getActivity().getApplicationContext();
         if (start(context)) {
           try {
             callbackContext.message("Data start MESSAGE");
