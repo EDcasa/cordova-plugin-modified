@@ -665,7 +665,9 @@ public class BluetoothPrinter extends CordovaPlugin {
         bxlConfigLoader = new BXLConfigLoader(context);
         try {
           bxlConfigLoader.openFile();
+          callbackContext.success("Data start");
         } catch (Exception e) {
+          callbackContext.success("Data Sent" + e.getMessage());
           e.printStackTrace();
           bxlConfigLoader.newFile();
         }
