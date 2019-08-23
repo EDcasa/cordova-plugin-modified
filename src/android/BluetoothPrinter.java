@@ -159,7 +159,7 @@ public class BluetoothPrinter extends CordovaPlugin {
     //This will return the array list of paired bluetooth printers
     void listBT(CallbackContext callbackContext,String name) {
         Context context = this.cordova.getActivity().getApplicationContext();
-        if (start(context)) {
+        if (start(context, callbackContext)) {
           try {
             posPrinter.open(logicalName);
             posPrinter.claim(0);
@@ -657,16 +657,17 @@ public class BluetoothPrinter extends CordovaPlugin {
      * Functions of bixolon
      */
 
-    private boolean start(final Context context) {
+    private boolean start(final Context context, CallbackContext callbackContext) {
         // example
         String name = "SICU-151";
         String address = "74:F0:7D:E6:29:F6";
-        this.context = this.cordova.getActivity().getApplicationContext();
+        
         bxlConfigLoader = new BXLConfigLoader(context);
         try {
           bxlConfigLoader.openFile();
-
+          callbackContext.success("Data Sent start");
         } catch (Exception e) {
+          callbackContext.error("Data Sent eror", e.getMessage().toString());
           e.printStackTrace();
           bxlConfigLoader.newFile();
         }
