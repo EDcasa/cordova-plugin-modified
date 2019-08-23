@@ -35,6 +35,10 @@
       </config-file>
 
       <source-file src="src/android/BluetoothPrinter.java" target-dir="src/com/ru/cordova/printer/bluetooth" />
+      <source-file src="src/android/libs/bixolon_printer_v130.jar" target-dir="libs"/>
+      <source-file src="src/android/libs/icu4j-58_1.jar" target-dir="libs"/>
+      <source-file src="src/android/libs/jpos118-controls.jar" target-dir="libs"/>
+      <source-file src="src/android/libs/xerces.jar" target-dir="libs"/>
 
    </platform>
 </plugin>
