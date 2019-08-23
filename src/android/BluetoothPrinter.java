@@ -657,7 +657,7 @@ public class BluetoothPrinter extends CordovaPlugin {
      */
 
     private boolean start(final Context context) {
-        this.context = context;
+        this.context = this.cordova.getActivity().getApplicationContext();;
         // example
         String name = "SICU-151";
         String address = "74:F0:7D:E6:29:F6";
@@ -766,7 +766,7 @@ public class BluetoothPrinter extends CordovaPlugin {
       }
 
       public void printPair(final Context context, String label, String value) {
-        this.context = context;
+        this.context = this.cordova.getActivity().getApplicationContext();;
         if (start(context)) {
     
           try {
@@ -796,7 +796,7 @@ public class BluetoothPrinter extends CordovaPlugin {
     
       public void printImage(final Context context, String path) {
         Log.v("RSULT:", path);
-        this.context = context;
+        this.context = this.cordova.getActivity().getApplicationContext();;
         if (start(context)) {
           if (openPrinter()) {
             InputStream is = null;
