@@ -159,7 +159,7 @@ public class BluetoothPrinter extends CordovaPlugin {
     //This will return the array list of paired bluetooth printers
     void listBT(CallbackContext callbackContext,String name) {
         Context context = this.cordova.getActivity().getApplicationContext();
-        start(context, callbackContext);
+        //start(context, callbackContext);
         printImageBixolon(context,name,callbackContext);
     }
 
