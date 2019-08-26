@@ -658,77 +658,6 @@ public class BluetoothPrinter extends CordovaPlugin {
         }
         posPrinter = new POSPrinter(context);
     
-        posPrinter.addErrorListener(new ErrorListener() {
-          @Override
-          public void errorOccurred(final ErrorEvent errorEvent) {
-            Activity activity = (Activity) context;
-            activity.runOnUiThread(new Runnable() {
-    
-              @Override
-              public void run() {
-    
-                Toast.makeText(context, "Error status : " + getERMessage(errorEvent.getErrorCodeExtended()),
-                    Toast.LENGTH_SHORT).show();
-    
-                if (getERMessage(errorEvent.getErrorCodeExtended()).equals("Power off")) {
-                  try {
-                    posPrinter.close();
-                  } catch (JposException e) {
-                    callbackContext.error("Data Sent eror"+e.getMessage().toString());
-                    e.printStackTrace();
-                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                  }
-                  // port-close
-                } else if (getERMessage(errorEvent.getErrorCodeExtended()).equals("Cover open")) {
-                  // re-print
-                } else if (getERMessage(errorEvent.getErrorCodeExtended()).equals("Paper empty")) {
-                  // re-print
-                }
-              }
-            });
-          }
-        });
-        posPrinter.addOutputCompleteListener(new OutputCompleteListener() {
-          @Override
-          public void outputCompleteOccurred(final OutputCompleteEvent outputCompleteEvent) {
-            Activity activity = (Activity) context;
-            activity.runOnUiThread(new Runnable() {
-              @Override
-              public void run() {
-                Toast.makeText(context, "complete print", Toast.LENGTH_SHORT).show();
-              }
-            });
-          }
-        });
-        posPrinter.addStatusUpdateListener(new StatusUpdateListener() {
-          @Override
-          public void statusUpdateOccurred(final StatusUpdateEvent statusUpdateEvent) {
-            Activity activity = (Activity) context;
-            activity.runOnUiThread(new Runnable() {
-    
-              @Override
-              public void run() {
-                Toast.makeText(context, "printer status : " + getSUEMessage(statusUpdateEvent.getStatus()),
-                    Toast.LENGTH_SHORT).show();
-    
-                if (getSUEMessage(statusUpdateEvent.getStatus()).equals("Power off")) {
-                  Toast.makeText(context, "check the printer - Power off", Toast.LENGTH_SHORT).show();
-                } else if (getSUEMessage(statusUpdateEvent.getStatus()).equals("Cover Open")) {
-                  // display message
-                  Toast.makeText(context, "check the printer - Cover Open", Toast.LENGTH_SHORT).show();
-                } else if (getSUEMessage(statusUpdateEvent.getStatus()).equals("Cover OK")) {
-                  // re-print
-                } else if (getSUEMessage(statusUpdateEvent.getStatus()).equals("Receipt Paper Empty")) {
-                  // display message
-                  Toast.makeText(context, "check the printer - Receipt Paper Empty", Toast.LENGTH_SHORT).show();
-                } else if (getSUEMessage(statusUpdateEvent.getStatus()).equals("Receipt Paper OK")) {
-                  // re-print
-                }
-              }
-            });
-          }
-        });
-    
         try {
           for (Object entry : bxlConfigLoader.getEntries()) {
             JposEntry jposEntry = (JposEntry) entry;
@@ -799,14 +728,13 @@ public class BluetoothPrinter extends CordovaPlugin {
               buffer.put((byte) compress);
               buffer.put((byte) 0x00);
               Log.v("inputstream", "buffer");
-              callbackContext.success("Activity print"+path);
               posPrinter.printBitmap(buffer.getInt(0), path, posPrinter.getRecLineWidth(), POSPrinterConst.PTR_BM_LEFT);
               Log.v("ERRORCONSOLA", "buffer");
               callbackContext.success("Activity print");
             } catch (JposException e) {
               callbackContext.error("error aqui"+e.getMessage().toString()+" " +e.toString());
               e.printStackTrace();
-              Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+              //Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
             } /*finally {
               if (is != null) {
                 Log.v("inputstream", "aqui");
