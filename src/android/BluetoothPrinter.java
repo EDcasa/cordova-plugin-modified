@@ -777,6 +777,7 @@ public class BluetoothPrinter extends CordovaPlugin {
           } finally {
             try {
               //posPrinter.close();
+              Log.v("bixolon", "close");
             } catch (JposException e) {
               e.printStackTrace();
             }
@@ -811,6 +812,7 @@ public class BluetoothPrinter extends CordovaPlugin {
                 Log.v("inputstream", "aqui");
                 try {
                   //is.close();
+                  Log.v("bixolon", "colse image");
                 } catch (IOException e) {
                   e.printStackTrace();
                 }
