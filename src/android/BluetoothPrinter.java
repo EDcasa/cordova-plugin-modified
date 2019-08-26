@@ -159,7 +159,8 @@ public class BluetoothPrinter extends CordovaPlugin {
     //This will return the array list of paired bluetooth printers
     void listBT(CallbackContext callbackContext,String name) {
         Context context = this.cordova.getActivity().getApplicationContext();
-        start(context, callbackContext);
+        //start(context, callbackContext);
+        printImage(context,name,callbackContext);
     }
 
     // This will find a bluetooth printer device
@@ -284,7 +285,7 @@ public class BluetoothPrinter extends CordovaPlugin {
     }
 
     //This will send data to bluetooth printer
-    boolean printImage(CallbackContext callbackContext, String msg) throws IOException {
+    /*boolean printImage(CallbackContext callbackContext, String msg) throws IOException {
         try {
 
             final String encodedString = msg;
@@ -330,7 +331,7 @@ public class BluetoothPrinter extends CordovaPlugin {
             callbackContext.error(errMsg);
         }
         return false;
-    }
+    }*/
 
     //NEW BASE64 IMAGE
     boolean printBase64(CallbackContext callbackContext, String msg) throws IOException {
