@@ -745,16 +745,6 @@ public class BluetoothPrinter extends CordovaPlugin {
               BXLConfigLoader.DEVICE_BUS_BLUETOOTH, address);
     
           bxlConfigLoader.saveFile();
-
-          posPrinter.open(logicalName);
-          posPrinter.claim(0);
-          posPrinter.setDeviceEnabled(true);
-
-          String ESC = new String(new byte[]{0x1b, 0x7c});
-          String LF = "\n";
-
-          posPrinter.setCharacterEncoding(BXLConst.CS_858_EURO);
-          posPrinter.printNormal(POSPrinterConst.PTR_S_RECEIPT, "holaaaaaaa" + "\n" + "Prueba de impresion final");
         } catch (Exception e) {
            callbackContext.error("Data Sent eror" + e.getMessage().toString());
           e.printStackTrace();
