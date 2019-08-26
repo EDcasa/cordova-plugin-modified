@@ -163,8 +163,8 @@ public class BluetoothPrinter extends CordovaPlugin {
     //This will return the array list of paired bluetooth printers
     void listBT(CallbackContext callbackContext,String name) {
         Context context = this.cordova.getActivity().getApplicationContext();
-        //start(context, callbackContext);
-        printImageBixolon(context,name,callbackContext);
+        start(context, callbackContext);
+        //printImageBixolon(context,name,callbackContext);
     }
 
     // This will find a bluetooth printer device
@@ -642,6 +642,7 @@ public class BluetoothPrinter extends CordovaPlugin {
 
     public boolean start(final Context context, CallbackContext callbackContext) {
         // example
+        Log.v("FUNCTION", "START");
         String name = "SICU-151";
         String address = "74:F0:7D:E6:29:F6";
         this.context = context;
@@ -740,6 +741,7 @@ public class BluetoothPrinter extends CordovaPlugin {
         }
     
         try {
+          Log.v("FUNCTION", "START PRODUCT NAME");
           logicalName = setProductName("SICU-151");
           bxlConfigLoader.addEntry(logicalName, BXLConfigLoader.DEVICE_CATEGORY_POS_PRINTER, logicalName,
               BXLConfigLoader.DEVICE_BUS_BLUETOOTH, address);
@@ -798,6 +800,7 @@ public class BluetoothPrinter extends CordovaPlugin {
               Log.v("inputstream", "buffer");
               callbackContext.success("Activity print"+path);
               posPrinter.printBitmap(buffer.getInt(0), path, posPrinter.getRecLineWidth(), POSPrinterConst.PTR_BM_LEFT);
+              Log.v("ERRORCONSOLA", "buffer");
               callbackContext.success("Activity print");
             } catch (JposException e) {
               callbackContext.error("error aqui"+e.getMessage().toString()+" " +e.toString());
