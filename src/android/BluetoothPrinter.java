@@ -642,7 +642,7 @@ public class BluetoothPrinter extends CordovaPlugin {
 
     public boolean start(final Context context, CallbackContext callbackContext) {
         // example
-        Log.v("FUNCTION", "START");
+        Log.v("bixolon", "START");
         String name = "SICU-151";
         String address = "74:F0:7D:E6:29:F6";
         this.context = context;
@@ -741,7 +741,7 @@ public class BluetoothPrinter extends CordovaPlugin {
         }
     
         try {
-          Log.v("FUNCTION", "START PRODUCT NAME");
+          Log.v("bixolon", "START PRODUCT NAME");
           logicalName = setProductName("SICU-151");
           bxlConfigLoader.addEntry(logicalName, BXLConfigLoader.DEVICE_CATEGORY_POS_PRINTER, logicalName,
               BXLConfigLoader.DEVICE_BUS_BLUETOOTH, address);
@@ -776,7 +776,7 @@ public class BluetoothPrinter extends CordovaPlugin {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
           } finally {
             try {
-              posPrinter.close();
+              //posPrinter.close();
             } catch (JposException e) {
               e.printStackTrace();
             }
@@ -786,7 +786,7 @@ public class BluetoothPrinter extends CordovaPlugin {
     
       public void printImageBixolon(final Context context, String path1, CallbackContext callbackContext) {
         String path = Environment.getExternalStorageDirectory().toString() + "/Pictures/06-emov.jpg";
-        Log.v("RSULT:", path);
+        Log.v("bixolon:", path);
         this.context = context;
         if (start(this.context, callbackContext)) {
           if (openPrinter()) {
@@ -810,7 +810,7 @@ public class BluetoothPrinter extends CordovaPlugin {
               if (is != null) {
                 Log.v("inputstream", "aqui");
                 try {
-                  is.close();
+                  //is.close();
                 } catch (IOException e) {
                   e.printStackTrace();
                 }
