@@ -646,7 +646,7 @@ public class BluetoothPrinter extends CordovaPlugin {
         bxlConfigLoader = new BXLConfigLoader(context);
         try {
           bxlConfigLoader.openFile();
-          callbackContext.success("Data Sent start");
+          //callbackContext.success("Data Sent start");
         } catch (Exception e) {
           //callbackContext.error("Data Sent eror", e.getMessage().toString());
           e.printStackTrace();
@@ -799,7 +799,7 @@ public class BluetoothPrinter extends CordovaPlugin {
               buffer.put((byte) 0x00);
               Log.v("inputstream", "buffer");
               posPrinter.printBitmap(buffer.getInt(0), path, posPrinter.getRecLineWidth(), POSPrinterConst.PTR_BM_LEFT);
-    
+              callbackContext.success("Activity","print");
             } catch (JposException e) {
               e.printStackTrace();
               Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
