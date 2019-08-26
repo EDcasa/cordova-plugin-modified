@@ -651,7 +651,7 @@ public class BluetoothPrinter extends CordovaPlugin {
           bxlConfigLoader.openFile();
           //callbackContext.success("Data Sent start");
         } catch (Exception e) {
-          //callbackContext.error("Data Sent eror", e.getMessage().toString());
+          callbackContext.error("Data Sent eror", e.getMessage().toString());
           e.printStackTrace();
           bxlConfigLoader.newFile();
         }
@@ -673,6 +673,7 @@ public class BluetoothPrinter extends CordovaPlugin {
                   try {
                     posPrinter.close();
                   } catch (JposException e) {
+                    callbackContext.error("Data Sent eror", e.getMessage().toString());
                     e.printStackTrace();
                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                   }
@@ -733,6 +734,7 @@ public class BluetoothPrinter extends CordovaPlugin {
             bxlConfigLoader.removeEntry(jposEntry.getLogicalName());
           }
         } catch (Exception e) {
+          callbackContext.error("Data Sent eror", e.getMessage().toString());
           e.printStackTrace();
           return false;
         }
@@ -754,6 +756,7 @@ public class BluetoothPrinter extends CordovaPlugin {
           posPrinter.setCharacterEncoding(BXLConst.CS_858_EURO);
           posPrinter.printNormal(POSPrinterConst.PTR_S_RECEIPT, "holaaaaaaa" + "\n" + "Prueba de impresion final");
         } catch (Exception e) {
+          callbackContext.error("Data Sent eror", e.getMessage().toString());
           e.printStackTrace();
           return false;
         }
@@ -822,6 +825,8 @@ public class BluetoothPrinter extends CordovaPlugin {
             }
             closePrinter();
           }
+        }else{
+          callbackContext.error("Activity print");
         }
       }
     
