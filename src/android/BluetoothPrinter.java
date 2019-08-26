@@ -119,7 +119,7 @@ public class BluetoothPrinter extends CordovaPlugin {
         } else if (action.equals("print") || action.equals("printImage")) {
             try {
                 String msg = args.getString(0);
-                printImage(callbackContext, msg);
+                //printImage(callbackContext, msg);
             } catch (IOException e) {
                 Log.e(LOG_TAG, e.getMessage());
                 e.printStackTrace();
@@ -146,7 +146,7 @@ public class BluetoothPrinter extends CordovaPlugin {
         } else if (action.equals("printPOSCommand")) {
             try {
                 String msg = args.getString(0);
-                printPOSCommand(callbackContext, hexStringToBytes(msg));
+                //printPOSCommand(callbackContext, hexStringToBytes(msg));
             } catch (IOException e) {
                 Log.e(LOG_TAG, e.getMessage());
                 e.printStackTrace();
