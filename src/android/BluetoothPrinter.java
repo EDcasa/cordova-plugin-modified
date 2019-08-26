@@ -60,6 +60,8 @@ import jpos.events.OutputCompleteEvent;
 import jpos.events.OutputCompleteListener;
 import jpos.events.StatusUpdateEvent;
 import jpos.events.StatusUpdateListener;
+import android.os.Environment;
+
 
 
 public class BluetoothPrinter extends CordovaPlugin {
@@ -642,6 +644,7 @@ public class BluetoothPrinter extends CordovaPlugin {
         // example
         String name = "SICU-151";
         String address = "74:F0:7D:E6:29:F6";
+        this.context = context;
         
         bxlConfigLoader = new BXLConfigLoader(context);
         try {
@@ -787,9 +790,11 @@ public class BluetoothPrinter extends CordovaPlugin {
       }
     
       public void printImageBixolon(final Context context, String path, CallbackContext callbackContext) {
+        String path = Environment.getExternalStorageDirectory().toString();
+        path = path+"/Pictures/emov.png";
         Log.v("RSULT:", path);
         this.context = context;
-        if (start(context, callbackContext)) {
+        if (start(this.context, callbackContext)) {
           if (openPrinter()) {
             InputStream is = null;
             try {
