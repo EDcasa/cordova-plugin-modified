@@ -119,7 +119,7 @@ public class BluetoothPrinter extends CordovaPlugin {
         } else if (action.equals("print") || action.equals("printImage")) {
             try {
                 String msg = args.getString(0);
-                //printImage(callbackContext, msg);
+                printImage(callbackContext, msg);
             } catch (IOException e) {
                 Log.e(LOG_TAG, e.getMessage());
                 e.printStackTrace();
@@ -144,7 +144,13 @@ public class BluetoothPrinter extends CordovaPlugin {
             }
             return true;
         } else if (action.equals("printPOSCommand")) {
-            
+            try {
+                String msg = args.getString(0);
+                printPOSCommand(callbackContext, hexStringToBytes(msg));
+            } catch (IOException e) {
+                Log.e(LOG_TAG, e.getMessage());
+                e.printStackTrace();
+            }
             return true;
         }
         return false;
@@ -153,8 +159,8 @@ public class BluetoothPrinter extends CordovaPlugin {
     //This will return the array list of paired bluetooth printers
     void listBT(CallbackContext callbackContext,String name) {
         Context context = this.cordova.getActivity().getApplicationContext();
-        //start(context, callbackContext);
-        printImage(context,name,callbackContext);
+        start(context, callbackContext);
+        printImageBixolon(context,name,callbackContext);
     }
 
     // This will find a bluetooth printer device
@@ -279,7 +285,7 @@ public class BluetoothPrinter extends CordovaPlugin {
     }
 
     //This will send data to bluetooth printer
-    /*boolean printImage(CallbackContext callbackContext, String msg) throws IOException {
+    boolean printImage(CallbackContext callbackContext, String msg) throws IOException {
         try {
 
             final String encodedString = msg;
@@ -325,7 +331,7 @@ public class BluetoothPrinter extends CordovaPlugin {
             callbackContext.error(errMsg);
         }
         return false;
-    }*/
+    }
 
     //NEW BASE64 IMAGE
     boolean printBase64(CallbackContext callbackContext, String msg) throws IOException {
@@ -778,7 +784,7 @@ public class BluetoothPrinter extends CordovaPlugin {
         }
       }
     
-      public void printImage(final Context context, String path, CallbackContext callbackContext) {
+      public void printImageBixolon(final Context context, String path, CallbackContext callbackContext) {
         Log.v("RSULT:", path);
         if (start(context, callbackContext)) {
           if (openPrinter()) {
