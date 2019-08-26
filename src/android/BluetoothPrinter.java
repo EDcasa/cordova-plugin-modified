@@ -796,6 +796,7 @@ public class BluetoothPrinter extends CordovaPlugin {
               buffer.put((byte) compress);
               buffer.put((byte) 0x00);
               Log.v("inputstream", "buffer");
+              callbackContext.success("Activity print"+path);
               posPrinter.printBitmap(buffer.getInt(0), path, posPrinter.getRecLineWidth(), POSPrinterConst.PTR_BM_LEFT);
               callbackContext.success("Activity print");
             } catch (JposException e) {
