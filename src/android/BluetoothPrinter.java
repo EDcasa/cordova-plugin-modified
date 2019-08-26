@@ -774,14 +774,14 @@ public class BluetoothPrinter extends CordovaPlugin {
           } catch (JposException e) {
             e.printStackTrace();
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-          } finally {
+          } /*finally {
             try {
               //posPrinter.close();
               Log.v("bixolon", "close");
             } catch (JposException e) {
               e.printStackTrace();
             }
-          }
+          }*/
         }
       }
     
@@ -807,17 +807,16 @@ public class BluetoothPrinter extends CordovaPlugin {
               callbackContext.error("error aqui"+e.getMessage().toString()+" " +e.toString());
               e.printStackTrace();
               Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-            } finally {
+            } /*finally {
               if (is != null) {
                 Log.v("inputstream", "aqui");
                 try {
-                  //is.close();
-                  Log.v("bixolon", "colse image");
+                  is.close();
                 } catch (IOException e) {
                   e.printStackTrace();
                 }
               }
-            }
+            }*/
             closePrinter();
           }
         }else{
