@@ -94,7 +94,7 @@ public class BluetoothPrinter extends CordovaPlugin {
         if (action.equals("list")) {
             String name = args.getString(0);
             //listBT(callbackContext, name);
-            printImage(context,name,callbackContext);
+            printImageBixolon(context,name,callbackContext);
             return true;
         } else if (action.equals("connect")) {
             String name = args.getString(0);
