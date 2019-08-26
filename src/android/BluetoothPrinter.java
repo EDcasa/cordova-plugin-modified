@@ -80,7 +80,7 @@ public class BluetoothPrinter extends CordovaPlugin {
     private BXLConfigLoader bxlConfigLoader;
     private POSPrinter posPrinter;
     private String logicalName;
-    //Context context;
+    Context context;
 
     private int brightness = 50;
     private int compress = 1;
@@ -788,6 +788,7 @@ public class BluetoothPrinter extends CordovaPlugin {
     
       public void printImageBixolon(final Context context, String path, CallbackContext callbackContext) {
         Log.v("RSULT:", path);
+        this.context = context;
         if (start(context, callbackContext)) {
           if (openPrinter()) {
             InputStream is = null;
@@ -801,6 +802,7 @@ public class BluetoothPrinter extends CordovaPlugin {
               posPrinter.printBitmap(buffer.getInt(0), path, posPrinter.getRecLineWidth(), POSPrinterConst.PTR_BM_LEFT);
               callbackContext.success("Activity print");
             } catch (JposException e) {
+              callbackContext.error(e.getMessage().toString());
               e.printStackTrace();
               Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
             } finally {
