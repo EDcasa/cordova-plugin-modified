@@ -815,7 +815,8 @@ public class BluetoothPrinter extends CordovaPlugin {
           return true;
         } catch (JposException e) {
           e.printStackTrace();
-    
+
+          Log.v("inputstream", "cerrar conexion");
           try {
             posPrinter.close();
           } catch (JposException e1) {
