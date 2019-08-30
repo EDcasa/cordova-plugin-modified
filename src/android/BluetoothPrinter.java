@@ -806,7 +806,7 @@ public class BluetoothPrinter extends CordovaPlugin {
         return productName;
       }
     
-      private boolean openPrinter() {
+      private boolean openPrinter(CallbackContext callbackContext) {
         Log.v("inputstream", "apen");
         try {
           posPrinter.open(logicalName);
@@ -815,8 +815,8 @@ public class BluetoothPrinter extends CordovaPlugin {
           return true;
         } catch (JposException e) {
           e.printStackTrace();
-
           Log.v("inputstream", "cerrar conexion");
+          callbackContext.error("Verfica el estado de tu impresora, o que esta se encuentre encendida")
           try {
             posPrinter.close();
           } catch (JposException e1) {
