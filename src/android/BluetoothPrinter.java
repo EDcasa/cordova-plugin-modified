@@ -719,7 +719,7 @@ public class BluetoothPrinter extends CordovaPlugin {
         Log.v("bixolon:", path);
         this.context = context;
         if (start(this.context, callbackContext)) {
-          if (openPrinter()) {
+          if (openPrinter(callbackContext)) {
             InputStream is = null;
             try {
               ByteBuffer buffer = ByteBuffer.allocate(4);
